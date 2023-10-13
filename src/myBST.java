@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class myBST {
     public Node root;
 
@@ -36,16 +38,29 @@ public class myBST {
 
         return node;
     }
-
-    public void inorderTraversal() {
-        inorderTraversal(root);
+    public int countCarsSoldOnOrAfterDate(String carMake, Date targetDate) {
+        return countCarsSoldOnOrAfterDate(root, carMake, targetDate);
     }
 
-    private void inorderTraversal(Node node) {
-        if (node != null) {
-            inorderTraversal(node.left);
-            System.out.println(node.data);
-            inorderTraversal(node.right);
+    private int countCarsSoldOnOrAfterDate(Node node, String carMake, Date targetDate) {
+        if (node == null) {
+            return 0;
         }
+
+        int count = 0;
+
+        // Check if the current node's data matches the criteria
+        if (node.data.getCarMake().equalsIgnoreCase(carMake) && !node.data.getDate().before(targetDate)) {
+            count++;
+        }
+
+        // Recursively search the left and right subtrees
+        count += countCarsSoldOnOrAfterDate(node.left, carMake, targetDate);
+        count += countCarsSoldOnOrAfterDate(node.right, carMake, targetDate);
+
+        return count;
     }
+
+
+
 }

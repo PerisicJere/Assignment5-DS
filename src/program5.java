@@ -6,74 +6,45 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Program5 {
-
+public class program5 {
     public static void main(String[] args) {
-        myBST tree = new myBST();
-        String csvFilePath = "small_sample.csv"; // Replace with your CSV file path
+        myBST tree = new myBST();  // Create a Binary Search Tree
 
-        insertFromCSV(tree, csvFilePath);
+        // Load data from CSV file into the tree
+        insertFromCSV(tree, "small_sample.csv");  // Replace "sales_data.csv" with your actual CSV file path
 
+        // Create a scanner for user input
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Menu:");
-            System.out.println("1. Calculate the number of cars sold on and after a specific date");
-            System.out.println("2. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.println("Enter a car make and a date (yyyy-MM-dd):");
+            System.out.print("Car Make: ");
+            String carMake = scanner.next();
+            System.out.print("Date (yyyy-MM-dd): ");
+            String dateString = scanner.next();
 
-            int choice = scanner.nextInt();
+            // Parse the user-entered date
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date targetDate;
+            try {
+                targetDate = sdf.parse(dateString);
+            } catch (ParseException e) {
+                System.out.println("Invalid date format. Please use yyyy-MM-dd.");
+                continue;
+            }
 
-            switch (choice) {
-                case 1:
-                    handleUserInputAndCalculate(tree);
-                    break;
-                case 2:
-                    System.out.println("Exiting the program.");
-                    scanner.close();
-                    System.exit(0);
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+            // Calculate the number of cars sold on and after the specified date
+            int count = tree.countCarsSoldOnOrAfterDate(carMake, targetDate);
+            System.out.println("Number of cars sold by " + carMake + " on and after " + dateString + ": " + count);
+
+            System.out.print("Do you want to analyze another date and car make? (yes/no): ");
+            String response = scanner.next().toLowerCase();
+            if (!response.equals("yes")) {
+                break;
             }
         }
-    }
 
-    private static void handleUserInputAndCalculate(myBST tree) {
-        Scanner scanner = new Scanner(System.in);
-        String carMake = getUserInput("Enter Car Make: ", scanner);
-        String dateStr = getUserInput("Enter Date (yyyy-MM-dd): ", scanner);
-
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date targetDate = sdf.parse(dateStr);
-
-            int carsSold = countCarsSoldOnAndAfterDate(tree.root, carMake, targetDate);
-            System.out.println("Number of cars sold by " + carMake + " on and after " + dateStr + ": " + carsSold);
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Please use yyyy-MM-dd format.");
-        }
-    }
-
-    private static String getUserInput(String prompt, Scanner scanner) {
-        System.out.print(prompt);
-        return scanner.next();
-    }
-
-    private static int countCarsSoldOnAndAfterDate(myBST.Node node, String carMake, Date targetDate) {
-        if (node == null) {
-            return 0;
-        }
-
-        int count = 0;
-
-        if (node.data.getDate().compareTo(targetDate) >= 0 && node.data.getCarMake().equals(carMake)) {
-            count++;
-        }
-
-        count += countCarsSoldOnAndAfterDate(node.left, carMake, targetDate);
-        count += countCarsSoldOnAndAfterDate(node.right, carMake, targetDate);
-
-        return count;
+        scanner.close();
     }
 
     private static void insertFromCSV(myBST tree, String csvFilePath) {
@@ -110,4 +81,26 @@ public class Program5 {
             e.printStackTrace();
         }
     }
+    private static Date parseDate(String dateString) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
+
+    private static int calculateCarSales(String[] carMakes, String[] saleDates, String targetCarMake, Date targetDate) {
+        int count = 0;
+        for (int i = 0; i < carMakes.length; i++) {
+            if (carMakes[i].equalsIgnoreCase(targetCarMake)) {
+                Date saleDate = parseDate(saleDates[i]);
+                if (saleDate != null && !saleDate.before(targetDate)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
 }
