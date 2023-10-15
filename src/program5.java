@@ -61,6 +61,8 @@ public class program5 {
                 if (parts.length != 9) {
                     continue;
                 }
+
+
                 String dateStr = parts[0];
                 String salesperson = parts[1];
                 String customerName = parts[2];

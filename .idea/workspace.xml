@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbbe548f-9b1d-47af-b4b1-c4ecac613ca0" name="Changes" comment="Fixing">
-      <change afterPath="$PROJECT_DIR$/small_sample.csv" afterDir="false" />
+    <list default="true" id="cbbe548f-9b1d-47af-b4b1-c4ecac613ca0" name="Changes" comment="working">
+      <change afterPath="$PROJECT_DIR$/car_sales_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/myBST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myBST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/program5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program5.java" afterDir="false" />
@@ -60,6 +60,9 @@
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -70,7 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1697224488423</updated>
       <workItem from="1697224489429" duration="872000" />
-      <workItem from="1697225381246" duration="618000" />
+      <workItem from="1697225381246" duration="3850000" />
     </task>
     <task id="LOCAL-00001" summary="Fixing">
       <option name="closed" value="true" />
@@ -88,7 +91,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697224601881</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="working">
+      <option name="closed" value="true" />
+      <created>1697226260130</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1697226260130</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +118,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixing" />
+    <MESSAGE value="working" />
+    <option name="LAST_COMMIT_MESSAGE" value="working" />
   </component>
 </project>

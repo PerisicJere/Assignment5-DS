@@ -39,28 +39,23 @@ public class myBST {
         return node;
     }
     public int countCarsSoldOnOrAfterDate(String carMake, Date targetDate) {
-        return countCarsSoldOnOrAfterDate(root, carMake, targetDate);
-    }
-
-    private int countCarsSoldOnOrAfterDate(Node node, String carMake, Date targetDate) {
-        if (node == null) {
-            return 0;
-        }
-
         int count = 0;
+        Node currentNode = root;
 
-        // Check if the current node's data matches the criteria
-        if (node.data.getCarMake().equalsIgnoreCase(carMake) && !node.data.getDate().before(targetDate)) {
-            count++;
+        while (currentNode != null) {
+            int carMakeComparison = carMake.compareToIgnoreCase(currentNode.data.getCarMake());
+
+            if (carMakeComparison == 0 && !currentNode.data.getDate().before(targetDate)) {
+                count++;
+            }
+
+            if (carMakeComparison <= 0) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
         }
-
-        // Recursively search the left and right subtrees
-        count += countCarsSoldOnOrAfterDate(node.left, carMake, targetDate);
-        count += countCarsSoldOnOrAfterDate(node.right, carMake, targetDate);
 
         return count;
     }
-
-
-
 }
