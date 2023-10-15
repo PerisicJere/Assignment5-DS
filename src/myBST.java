@@ -1,4 +1,5 @@
 import java.util.Date;
+import java.util.Stack;
 
 public class myBST {
     public Node root;
@@ -38,24 +39,66 @@ public class myBST {
 
         return node;
     }
-    public int countCarsSoldOnOrAfterDate(String carMake, Date targetDate) {
+
+    public int calculateCarsSoldOnAndAfterDate(String carMake, Date date) {
+        return calculateCarsSoldOnAndAfterDate(root, carMake, date);
+    }
+
+    private int calculateCarsSoldOnAndAfterDate(Node node, String carMake, Date date) {
         int count = 0;
-        Node currentNode = root;
+        Stack<Node> stack = new Stack<>();
 
-        while (currentNode != null) {
-            int carMakeComparison = carMake.compareToIgnoreCase(currentNode.data.getCarMake());
+        while (node != null || !stack.isEmpty()) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
 
-            if (carMakeComparison == 0 && !currentNode.data.getDate().before(targetDate)) {
+            node = stack.pop();
+
+            int carMakeComparison = carMake.compareTo(node.data.getCarMake());
+            int dateComparison = date.compareTo(node.data.getDate());
+
+            if (carMakeComparison == 0 && dateComparison <= 0) {
                 count++;
             }
 
-            if (carMakeComparison <= 0) {
-                currentNode = currentNode.left;
-            } else {
-                currentNode = currentNode.right;
-            }
+            node = node.right;
         }
 
         return count;
     }
+
+    public int calculateCarsSoldOnAndAfterDateRecursive(String carMake, Date date) {
+        return calculateCarsSoldOnAndAfterDateRecursive(root, carMake, date);
+    }
+
+    private int calculateCarsSoldOnAndAfterDateRecursive(Node node, String carMake, Date date) {
+        if (node == null) {
+            return 0;
+        }
+
+        int carMakeComparison = carMake.compareTo(node.data.getCarMake());
+        int dateComparison = date.compareTo(node.data.getDate());
+
+        int count = 0;
+
+        if (dateComparison <= 0) {
+            if (carMakeComparison == 0) {
+                count++;
+            }
+            count += calculateCarsSoldOnAndAfterDateRecursive(node.left, carMake, date);
+        }
+
+        if (carMakeComparison <= 0) {
+            count += calculateCarsSoldOnAndAfterDateRecursive(node.left, carMake, date);
+        }
+
+        if (carMakeComparison >= 0) {
+            count += calculateCarsSoldOnAndAfterDateRecursive(node.right, carMake, date);
+        }
+
+        return count;
+    }
+
 }

@@ -11,8 +11,11 @@ public class program5 {
         myBST tree = new myBST();  // Create a Binary Search Tree
 
         // Load data from CSV file into the tree
-        insertFromCSV(tree, "small_sample.csv");  // Replace "sales_data.csv" with your actual CSV file path
+        long startTreeBuild = System.currentTimeMillis();
+        insertFromCSV(tree, "car_sales_data.csv");  // Replace "sales_data.csv" with your actual CSV file path
+        long endTreeBuild = System.currentTimeMillis();
 
+        System.out.println((double)(endTreeBuild-startTreeBuild)/1000+" seconds to build the binary search trees");
         // Create a scanner for user input
         Scanner scanner = new Scanner(System.in);
 
@@ -34,8 +37,15 @@ public class program5 {
             }
 
             // Calculate the number of cars sold on and after the specified date
-            int count = tree.countCarsSoldOnOrAfterDate(carMake, targetDate);
+            long start = System.currentTimeMillis();
+            int count = tree.calculateCarsSoldOnAndAfterDate(carMake, targetDate);
+            long end = System.currentTimeMillis();
+            System.out.println((double)(end-start)/1000+" seconds to calculate using children count fields");
             System.out.println("Number of cars sold by " + carMake + " on and after " + dateString + ": " + count);
+
+            int recursiveCount = tree.calculateCarsSoldOnAndAfterDateRecursive(carMake,targetDate);
+            System.out.println("Recursive number of cars sold by " + carMake + " on and after " + dateString + ": " + recursiveCount);
+            System.out.println((double) (end-start)/1000+ " seconds to calculate using recursive method");
 
             System.out.print("Do you want to analyze another date and car make? (yes/no): ");
             String response = scanner.next().toLowerCase();
@@ -51,7 +61,6 @@ public class program5 {
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             boolean skipHeader = true;
-
             while ((line = reader.readLine()) != null) {
                 if (skipHeader) {
                     skipHeader = false;
@@ -61,7 +70,6 @@ public class program5 {
                 if (parts.length != 9) {
                     continue;
                 }
-
 
                 String dateStr = parts[0];
                 String salesperson = parts[1];
@@ -83,26 +91,4 @@ public class program5 {
             e.printStackTrace();
         }
     }
-    private static Date parseDate(String dateString) {
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            return dateFormat.parse(dateString);
-        } catch (ParseException e) {
-            return null;
-        }
-    }
-
-    private static int calculateCarSales(String[] carMakes, String[] saleDates, String targetCarMake, Date targetDate) {
-        int count = 0;
-        for (int i = 0; i < carMakes.length; i++) {
-            if (carMakes[i].equalsIgnoreCase(targetCarMake)) {
-                Date saleDate = parseDate(saleDates[i]);
-                if (saleDate != null && !saleDate.before(targetDate)) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
-
 }
