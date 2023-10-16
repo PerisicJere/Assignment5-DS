@@ -23,5 +23,6 @@ This Java project allows you to analyze car sales records stored in a CSV file u
     java -Xss1024m program5 <csv-file>
 
 ## Issues 
-I had to use -Xss1024m to fix stackoverflow error.
+I had to use -Xss1024m to fix stackoverflow error. This is necessary for the recursive analysis method.
+
 
