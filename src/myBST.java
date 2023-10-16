@@ -40,11 +40,11 @@ public class myBST {
         return node;
     }
 
-    public int calculateCarsSoldOnAndAfterDate(String carMake, Date date) {
-        return calculateCarsSoldOnAndAfterDate(root, carMake, date);
+    public int calculateCarsSoldIterative(String carMake, Date date) {
+        return calculateCarsSold(root, carMake, date);
     }
 
-    private int calculateCarsSoldOnAndAfterDate(Node node, String carMake, Date date) {
+    private int calculateCarsSold(Node node, String carMake, Date date) {
         int count = 0;
         Stack<Node> stack = new Stack<>();
 
@@ -69,36 +69,32 @@ public class myBST {
         return count;
     }
 
-    public int calculateCarsSoldOnAndAfterDateRecursive(String carMake, Date date) {
-        return calculateCarsSoldOnAndAfterDateRecursive(root, carMake, date);
+    public int calculateCarsSoldRecursively(String carMake, Date startDate) {
+        return calculateCarsSoldRecursivelyHelperr(root, startDate, carMake);
     }
 
-    private int calculateCarsSoldOnAndAfterDateRecursive(Node node, String carMake, Date date) {
+    private int calculateCarsSoldRecursivelyHelperr(Node node, Date startDate, String carMake) {
         if (node == null) {
             return 0;
         }
 
-        int carMakeComparison = carMake.compareTo(node.data.getCarMake());
-        int dateComparison = date.compareTo(node.data.getDate());
-
         int count = 0;
 
-        if (dateComparison <= 0) {
-            if (carMakeComparison == 0) {
-                count++;
-            }
-            count += calculateCarsSoldOnAndAfterDateRecursive(node.left, carMake, date);
+        if (node.data.getDate().compareTo(startDate) >= 0 && node.data.getCarMake().equals(carMake)) {
+            count++;
         }
 
-        if (carMakeComparison <= 0) {
-            count += calculateCarsSoldOnAndAfterDateRecursive(node.left, carMake, date);
+        if (node.data.getDate().compareTo(startDate) >= 0) {
+            count += calculateCarsSoldRecursivelyHelperr(node.left, startDate, carMake);
         }
 
-        if (carMakeComparison >= 0) {
-            count += calculateCarsSoldOnAndAfterDateRecursive(node.right, carMake, date);
-        }
+        count += calculateCarsSoldRecursivelyHelperr(node.right, startDate, carMake);
 
         return count;
     }
 
 }
+
+
+
+
