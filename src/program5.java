@@ -6,6 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+/**
+ * @author Jere Perisic
+ * @version October 13, 2023
+ */
 public class program5 {
     public static void main(String[] args) {
         myBST tree = new myBST();  // Create a Binary Search Tree

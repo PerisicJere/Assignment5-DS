@@ -1,6 +1,8 @@
 import java.util.Date;
 import java.util.Stack;
-
+/**
+ * A Binary Search Tree (BST) for storing and searching sale records.
+ */
 public class myBST {
     public Node root;
 
@@ -10,7 +12,11 @@ public class myBST {
         Node right;
         int leftChildCount;
         int rightChildCount;
-
+        /**
+         * Constructs a new Node with sale record data.
+         *
+         * @param data The sale record data to store in the node.
+         */
         public Node(SaleRecord data) {
             this.data = data;
             this.left = null;
@@ -19,7 +25,11 @@ public class myBST {
             this.rightChildCount = 0;
         }
     }
-
+    /**
+     * Inserts a sale record into the BST.
+     *
+     * @param data The sale record to insert.
+     */
     public void insert(SaleRecord data) {
         root = insert(root, data);
     }
@@ -39,7 +49,13 @@ public class myBST {
 
         return node;
     }
-
+    /**
+     * Calculates the number of cars sold iteratively for a specific car make and date.
+     *
+     * @param carMake The car make to search for.
+     * @param date    The target date to filter sales records.
+     * @return The count of cars sold that match the criteria.
+     */
     public int calculateCarsSoldIterative(String carMake, Date date) {
         return calculateCarsSold(root, carMake, date);
     }
@@ -68,12 +84,18 @@ public class myBST {
 
         return count;
     }
-
+    /**
+     * Calculates the number of cars sold recursively for a specific car make and start date.
+     *
+     * @param carMake   The car make to search for.
+     * @param startDate The start date to filter sales records.
+     * @return The count of cars sold that match the criteria.
+     */
     public int calculateCarsSoldRecursively(String carMake, Date startDate) {
-        return calculateCarsSoldRecursivelyHelperr(root, startDate, carMake);
+        return calculateCarsSoldRecursivelyHelper(root, startDate, carMake);
     }
 
-    private int calculateCarsSoldRecursivelyHelperr(Node node, Date startDate, String carMake) {
+    private int calculateCarsSoldRecursivelyHelper(Node node, Date startDate, String carMake) {
         if (node == null) {
             return 0;
         }
@@ -85,10 +107,10 @@ public class myBST {
         }
 
         if (node.data.getDate().compareTo(startDate) >= 0) {
-            count += calculateCarsSoldRecursivelyHelperr(node.left, startDate, carMake);
+            count += calculateCarsSoldRecursivelyHelper(node.left, startDate, carMake);
         }
 
-        count += calculateCarsSoldRecursivelyHelperr(node.right, startDate, carMake);
+        count += calculateCarsSoldRecursivelyHelper(node.right, startDate, carMake);
 
         return count;
     }
