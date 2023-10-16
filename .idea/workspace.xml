@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cbbe548f-9b1d-47af-b4b1-c4ecac613ca0" name="Changes" comment="Some documentation">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="cbbe548f-9b1d-47af-b4b1-c4ecac613ca0" name="Changes" comment="README finished">
       <change afterPath="$PROJECT_DIR$/src/car_sales_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myBST$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/myBST$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myBST.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/myBST.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/program5.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/program5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/program5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program5.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +32,9 @@
         <option name="url" value="https://github.com/PerisicJere/Assignment5-DS.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -78,7 +84,7 @@
       <updated>1697224488423</updated>
       <workItem from="1697224489429" duration="872000" />
       <workItem from="1697225381246" duration="3850000" />
-      <workItem from="1697386228735" duration="21494000" />
+      <workItem from="1697386228735" duration="21817000" />
     </task>
     <task id="LOCAL-00001" summary="Fixing">
       <option name="closed" value="true" />
@@ -136,7 +142,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697415403002</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Some documentation">
+      <option name="closed" value="true" />
+      <created>1697415674251</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1697415674251</updated>
+    </task>
+    <task id="LOCAL-00009" summary="README finished">
+      <option name="closed" value="true" />
+      <created>1697415739070</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1697415739070</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +181,7 @@
     <MESSAGE value="not working" />
     <MESSAGE value="Finally working" />
     <MESSAGE value="Some documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some documentation" />
+    <MESSAGE value="README finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="README finished" />
   </component>
 </project>

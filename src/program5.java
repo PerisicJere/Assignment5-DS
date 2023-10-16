@@ -79,21 +79,21 @@ public class program5 {
      * @param targetDate  The target date to filter sales records.
      */
     private static void processCarSales(myBST tree, String carMake, Date targetDate) {
-        long startTime = System.currentTimeMillis();
+        long startTime1 = System.currentTimeMillis();
         int count = tree.calculateCarsSoldIterative(carMake, targetDate);
-        long endTime = System.currentTimeMillis();
+        long endTime1 = System.currentTimeMillis();
 
-        long elapsedTimeInSeconds = (endTime - startTime) / 1000;
-        System.out.println(elapsedTimeInSeconds + " seconds to calculate using children count fields");
+        double elapsedTimeInSeconds1 = (double)(endTime1 - startTime1) / 1000;
+        System.out.println(elapsedTimeInSeconds1 + " seconds to calculate using children count fields");
 
         System.out.println(count + " sales records are available for " + carMake + " after the date " + targetDate);
 
-        startTime = System.currentTimeMillis();
+        long startTime2 = System.currentTimeMillis();
         int recursiveCount = tree.calculateCarsSoldRecursively(carMake, targetDate);
-        endTime = System.currentTimeMillis();
+        long endTime2 = System.currentTimeMillis();
 
-        elapsedTimeInSeconds = (endTime - startTime) / 1000;
-        System.out.println(elapsedTimeInSeconds + " seconds to calculate using recursive method");
+        double elapsedTimeInSeconds2 = (double)(endTime2 - startTime2) / 1000;
+        System.out.println(elapsedTimeInSeconds2 + " seconds to calculate using recursive method");
 
         System.out.println(recursiveCount + " sales records are available for " + carMake + " after the date " + targetDate);
     }
