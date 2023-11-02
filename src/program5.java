@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,7 +11,7 @@ import java.util.Scanner;
 public class program5 {
     public static void main(String[] args) {
         myBST tree = new myBST();  // Create a Binary Search Tree
-        String file = args[0];
+        String file ="car_sales_data.csv";
 
         long timeToBuildTree = buildTreeFromCSV(tree, file);
         System.out.println(timeToBuildTree + " seconds to build the binary search tree");
@@ -28,8 +26,9 @@ public class program5 {
      * @return The time taken to build the tree in seconds.
      */
     private static long buildTreeFromCSV(myBST tree, String filePath) {
+        String outputFile = "buildTime.csv";
         long startTime = System.currentTimeMillis();
-        insertFromCSV(tree, filePath);
+        insertFromCSV(tree, filePath,outputFile);
         long endTime = System.currentTimeMillis();
         return (endTime - startTime) / 1000;
     }
@@ -79,8 +78,9 @@ public class program5 {
      * @param targetDate  The target date to filter sales records.
      */
     private static void processCarSales(myBST tree, String carMake, Date targetDate) {
+        String outputFile = "searchTime.csv";
         long startTime1 = System.currentTimeMillis();
-        int count = tree.calculateCarsSoldIterative(carMake, targetDate);
+        int count = tree.calculateCarsSoldIterative(carMake, targetDate,outputFile);
         long endTime1 = System.currentTimeMillis();
 
         double elapsedTimeInSeconds1 = (double)(endTime1 - startTime1) / 1000;
@@ -88,14 +88,6 @@ public class program5 {
 
         System.out.println(count + " sales records are available for " + carMake + " after the date " + targetDate);
 
-        long startTime2 = System.currentTimeMillis();
-        int recursiveCount = tree.calculateCarsSoldRecursively(carMake, targetDate);
-        long endTime2 = System.currentTimeMillis();
-
-        double elapsedTimeInSeconds2 = (double)(endTime2 - startTime2) / 1000;
-        System.out.println(elapsedTimeInSeconds2 + " seconds to calculate using recursive method");
-
-        System.out.println(recursiveCount + " sales records are available for " + carMake + " after the date " + targetDate);
     }
 
 
@@ -105,10 +97,13 @@ public class program5 {
      *
      * @param tree         The Binary Search Tree to insert data into.
      * @param csvFilePath  The path to the CSV file containing sales records.
-     */    private static void insertFromCSV(myBST tree, String csvFilePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
+     */    private static void insertFromCSV(myBST tree, String csvFilePath,String outputFile) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             String line;
             boolean skipHeader = true;
+            int lineCount = 0;
+            long startTimeBatch = System.nanoTime();
             while ((line = reader.readLine()) != null) {
                 if (skipHeader) {
                     skipHeader = false;
@@ -134,7 +129,24 @@ public class program5 {
 
                 SaleRecord saleRecord = new SaleRecord(date, salesperson, customerName, carMake, carModel, carYear, salePrice, commissionRate, commissionEarned);
                 tree.insert(saleRecord);
+                lineCount++;
+
+                if (lineCount % 100 == 0) {
+                    long endTimeBatch = System.nanoTime();
+                    long elapsedTimeBatch = endTimeBatch - startTimeBatch;
+                    writer.write("," + (elapsedTimeBatch / 100));
+                    writer.newLine();
+                    startTimeBatch = System.nanoTime();
+                }
             }
+
+            if (lineCount % 100 != 0) {
+                long endTimeBatch = System.nanoTime();
+                long elapsedTimeBatch = endTimeBatch - startTimeBatch;
+                writer.write("," + (elapsedTimeBatch / 100));
+                writer.newLine();
+            }
+
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
