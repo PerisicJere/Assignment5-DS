@@ -35,23 +35,21 @@ public class myBST {
      *
      * @param
      */
-    public void insert(SaleRecord sr) {
-        root = insertHelper(root, sr);
+    public void insert(SaleRecord data) {
+        root = insert(root, data);
     }
 
-    private Node insertHelper(Node node, SaleRecord sr) {
+    private Node insert(Node node, SaleRecord data) {
         if (node == null) {
-            return new Node(sr);
+            return new Node(data);
         }
 
-        int dateComparison = node.data.date.compareTo(sr.date);
-
-        if (dateComparison <= 0) {
-            node.right = insertHelper(node.right, sr);
-            node.rightChildCount++;
-        } else {
-            node.left = insertHelper(node.left, sr);
+        if (data.getDate().compareTo(node.data.getDate()) < 0) {
             node.leftChildCount++;
+            node.left = insert(node.left, data);
+        } else {
+            node.rightChildCount++;
+            node.right = insert(node.right, data);
         }
 
         return node;
